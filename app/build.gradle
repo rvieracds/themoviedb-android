@@ -1,0 +1,106 @@
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
+
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
+    id("io.fabric")
+    id("com.google.gms.google-services")
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.example.themoviedb"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // common
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta3")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("com.google.android.material:material:1.2.0-alpha02")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinCompilerVersion.VERSION}")
+    implementation("androidx.core:core-ktx:1.2.0-rc01")
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    implementation("androidx.fragment:fragment-ktx:1.2.0-rc03")
+
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler, provide @OnLifecycleEvent
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.1.0")
+
+    // room
+    implementation("androidx.room:room-runtime:2.2.2")
+    kapt("androidx.room:room-compiler:2.2.2")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.2.2")
+
+    // navigation
+    implementation("androidx.navigation:navigation-runtime-ktx:2.2.0-rc03")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.2.0-rc03")
+    implementation("androidx.navigation:navigation-ui-ktx:2.2.0-rc03")
+
+    // gson
+    implementation("com.google.code.gson:gson:2.8.5")
+
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.6.1")
+    implementation("com.squareup.retrofit2:converter-gson:2.6.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:3.14.0")
+
+    // glide
+    implementation("com.github.bumptech.glide:glide:4.10.0")
+    kapt("com.github.bumptech.glide:compiler:4.10.0")
+
+    // koin
+    implementation("org.koin:koin-androidx-viewmodel:2.0.1")
+
+    // firebase
+    implementation("com.google.firebase:firebase-analytics:17.2.1")
+    implementation("com.crashlytics.sdk.android:crashlytics:2.10.1")
+
+    // unit test
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.mockito:mockito-core:2.27.0")
+    testImplementation("android.arch.core:core-testing:1.1.1")
+
+    androidTestImplementation("com.android.support.test:runner:1.0.2")
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+
+    androidTestImplementation("android.arch.persistence.room:testing:1.1.1")
+    androidTestImplementation("android.arch.core:core-testing:1.1.1")
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:3.14.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}")
+}
