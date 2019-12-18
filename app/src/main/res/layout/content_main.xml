@@ -11,6 +11,10 @@
     tools:showIn="@layout/activity_main"
     android:layout_marginTop="@dimen/activity_vertical_margin">
 
+    <include
+        android:id="@+id/llProgressBar"
+        android:visibility="gone"
+        layout="@layout/layout_progress_bar_with_text"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
