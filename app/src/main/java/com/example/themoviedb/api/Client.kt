@@ -4,15 +4,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Client {
-    val BASE_URL = "http://api.themoviedb.org/3/"
+    val Base_URL = "https://api.themoviedb.org/3/"
     var retrofit: Retrofit? = null
 
     fun getClient(): Retrofit? {
         if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            retrofit = Retrofit.Builder().baseUrl(Base_URL).addConverterFactory(GsonConverterFactory.create()).build()
         }
         return retrofit
     }

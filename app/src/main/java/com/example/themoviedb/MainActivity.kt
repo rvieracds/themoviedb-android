@@ -4,6 +4,8 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,44 +25,45 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
-    var recyclerView: RecyclerView? = null
-    private var adapter : MoviesAdapter? = null
-    private var apiService : Service? = null
-    private var client : Client? = null
-    private var call : Call<MoviesResponse>? = null
-    var movieList: List<Movie>? = null
-    var swipeContainer: SwipeRefreshLayout? = null
+    private lateinit var recyclerView: RecyclerView// Extends ViewGroup implements ScrollingView, NestedScrollingChild2
+    private lateinit var adapter: MoviesAdapter
+    private var movieList: List<Movie> = ArrayList()
+    private lateinit var swipeContainer: SwipeRefreshLayout // Whenever the user can refresh the contents of a view via a vertical swipe gesture.
+
+//    val LOG_TAG = MoviesAdapter::class.java.name//method will return the full package plus class name of that class as a string,
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initViews();
+        initViews()
 
-        swipeContainer!!.setColorSchemeResources(android.R.color.holo_orange_dark);
-        swipeContainer!!.setOnRefreshListener {
-            override fun onRefresh() {
-                initViews();
-                Toast.makeText(MainActivity.this, "Movies Refreshed", Toast.LENGTH_SHORT).show();
-            }
-
-        };
+        swipeContainer = findViewById(R.id.main_content)
+        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark)
+        swipeContainer.setOnRefreshListener {
+            initViews()
+            Toast.makeText(this@MainActivity, "Movies Refreshed", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initViews() {
         llProgressBar.visibility = View.VISIBLE
 
+        recyclerView = findViewById(R.id.recycler_view)
+        adapter = MoviesAdapter(this@MainActivity, movieList)
+
         if(baseContext.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView!!.layoutManager = GridLayoutManager(this, 2)
+            recyclerView?.layoutManager = GridLayoutManager(this, 2)
         } else {
-            recyclerView!!.layoutManager = GridLayoutManager(this, 4)
+            recyclerView?.layoutManager = GridLayoutManager(this, 4)
         }
 
-        recyclerView?.itemAnimator = DefaultItemAnimator();
-        recyclerView?.adapter = adapter;
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
 
-        loadJSON();
+        loadJSON()
     }
 
     private fun loadJSON() {
@@ -71,53 +74,47 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 
-            apiService?.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN).
-                enqueue(object : Callback<MoviesResponse> {
-                    override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
-                        if(response.isSuccessful) {
-                            val moviesResponse = response.body()
-                            if (moviesResponse?.movies != null) {
-                                recyclerView.adapter = MoviesAdapter(moviesResponse.movies!!)
-                                recyclerView.smoothScrollToPosition(0)
+            val client = Client()
+            val apiService = client.getClient()!!.create(Service::class.java)
+            val call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN)
 
-                                if (swipeContainer?.isRefreshing!!) {
-                                    swipeContainer!!.isRefreshing = false
-                                }
-
-                                llProgressBar.visibility = View.GONE
-                            } else {
-                                Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
+            call.enqueue(object : Callback<MoviesResponse> {
+                override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+                    if(response.isSuccessful) {
+                        val movies: List<Movie> = response.body()!!.getResults()
+                        recyclerView.adapter = MoviesAdapter(this@MainActivity, movies)
+                        recyclerView.smoothScrollToPosition(0)
+                        if (swipeContainer.isRefreshing) {
+                            swipeContainer.isRefreshing = false
                         }
-                    }
-
-                    override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
-                        Log.d("Error", t.message)
+                    } else {
                         Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                })
+                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                    Log.d("Error PEPE 0", t.message)
+                    Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
+                }
+            })
 
 
 
         } catch(e: Exception) {
-            Log.d("Error", e.message)
+            Log.d("Error z", e.message)
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun onCreateOptionsMenu(Menu menu) {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+        return  true
     }
 
-    fun onOptionsItemSelected(MenuItem item) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.getItemId()) {
             R.id.menu_settings -> return true
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
 }

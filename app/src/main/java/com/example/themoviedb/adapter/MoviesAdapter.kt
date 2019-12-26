@@ -1,13 +1,17 @@
 package com.example.themoviedb.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.themoviedb.DetailActivity
 import com.example.themoviedb.R
 import com.example.themoviedb.model.Movie
 
@@ -15,7 +19,6 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
 
     private var context: Context
     private var movies: List<Movie> = ArrayList()
-    private val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
     init {
         this.movies = movies
@@ -24,32 +27,54 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v : View = LayoutInflater.from(parent.context).inflate(R.layout.movie_card, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(itemView = v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        holder.bind(movies[position], listener)
-        holder.title.setText(movies[position].originalTitle)
-        val vote = movies[position].rating.toString()
-        holder.userrating.setText(vote)
+        holder.title.text = movies[position].getOriginalTitle()
+        val vote = movies[position].getVoteAverage().toString()
+        holder.userrating.text = vote
 
-        Glide.with(context).load(movies[position])
+        val requestOptions = RequestOptions()
+        requestOptions.placeholder(R.drawable.load)
+
+        Glide.with(context)
+            .load(movies[position].getPosterPath())
+            .apply(requestOptions)
+            .into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {
         return movies.size
     }
 
-    inner class ViewHolder() : RecyclerView.ViewHolder() {
-        lateinit var title: TextView
-        lateinit var userrating: TextView
-        lateinit var thumbnail: ImageView
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun ViewHolder(view: View) {
-            super(view)
-            title = view.findViewById(R.id.title)
-            userrating = view.findViewById(R.id.userrating)
-            thumbnail = view.findViewById(R.id.thumbnail)
+        var title: TextView
+        var userrating: TextView
+        var thumbnail: ImageView
+
+        init {
+            title = itemView.findViewById<View>(R.id.title) as TextView
+            userrating = itemView.findViewById<View>(R.id.userrating) as TextView
+            thumbnail = itemView.findViewById<View>(R.id.thumbnail) as ImageView
+
+            itemView.setOnClickListener { view ->
+                val pos = adapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    val clickedDataItem = movies[pos]
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("original_title", movies[pos].getOriginalTitle())
+                    intent.putExtra("poster_path", movies[pos].getPosterPath())
+                    intent.putExtra("overview", movies[pos].getOverview())
+                    intent.putExtra("vote_average", movies[pos].getVoteAverage())
+                    intent.putExtra("release_date", movies[pos].getReleaseDate())
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent)
+                    Toast.makeText(view.context, "You clicked" + clickedDataItem.getOriginalTitle(), Toast.LENGTH_LONG).show()
+                }
+            }
         }
+
     }
 }
