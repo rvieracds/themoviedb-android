@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity() {
     private var movieList: List<Movie> = ArrayList()
     private lateinit var swipeContainer: SwipeRefreshLayout // Whenever the user can refresh the contents of a view via a vertical swipe gesture.
 
-//    val LOG_TAG = MoviesAdapter::class.java.name//method will return the full package plus class name of that class as a string,
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -87,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                         if (swipeContainer.isRefreshing) {
                             swipeContainer.isRefreshing = false
                         }
+                        llProgressBar.visibility = View.GONE
                     } else {
                         Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
                     }

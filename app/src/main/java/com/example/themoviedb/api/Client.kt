@@ -9,7 +9,10 @@ class Client {
 
     fun getClient(): Retrofit? {
         if (retrofit == null) {
-            retrofit = Retrofit.Builder().baseUrl(Base_URL).addConverterFactory(GsonConverterFactory.create()).build()
+            retrofit = Retrofit.Builder()
+                .baseUrl(Base_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
         }
         return retrofit
     }
