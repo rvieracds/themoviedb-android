@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         adapter = MoviesAdapter(this@MainActivity, movieList)
 
         if(baseContext.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView?.layoutManager = GridLayoutManager(this, 2)
+            recyclerView?.layoutManager = GridLayoutManager(this, 1)
         } else {
             recyclerView?.layoutManager = GridLayoutManager(this, 4)
         }

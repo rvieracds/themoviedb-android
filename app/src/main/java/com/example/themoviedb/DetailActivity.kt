@@ -15,43 +15,48 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class DetailActivity : AppCompatActivity() {
     lateinit var nameOfMovie: TextView
-    lateinit var plotSynopsis: TextView
-    lateinit var userRating: TextView
+    lateinit var movieoverview: TextView
+    lateinit var userrating: TextView
     lateinit var releaseDate: TextView
     lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         initCollapsingToolbar()
+
         imageView = findViewById(R.id.thumbnail_image_header)
         nameOfMovie = findViewById(R.id.title)
-        plotSynopsis = findViewById(R.id.plotsynopsis)
-        userRating = findViewById(R.id.userrating)
-        releaseDate = findViewById(R.id.releasedate)
+        userrating = findViewById(R.id.userrating)
+        movieoverview = findViewById(R.id.movieoverview)
+
 
         val intent = intent
         if (intent.hasExtra("original_title")) {
             val thumbnail = getIntent().extras!!.getString("poster_path")
             val movieName = getIntent().extras!!.getString("original_title")
-            val synopsis = getIntent().extras!!.getString("overview")
+            val overview = getIntent().extras!!.getString("overview")
             val rating = getIntent().extras!!.getString("vote_average")
             val dateOfRelease = getIntent().extras!!.getString("release_date")
 
             val requestOptions = RequestOptions()
             requestOptions.placeholder(R.drawable.load)
+
+            val url = "https://image.tmdb.org/t/p/w500$thumbnail"
+
             Glide.with(this)
-                .load(thumbnail)
+                .load(url)
                 .apply(requestOptions)
                 .into(imageView)
 
             nameOfMovie.text = movieName
-            plotSynopsis.text = synopsis
-            userRating.text = rating
-            releaseDate.text = dateOfRelease
+            movieoverview.text = overview
+            userrating.text = rating
+//            releaseDate.text = dateOfRelease
 
         } else {
             Toast.makeText(this, "No API Data", Toast.LENGTH_LONG).show()

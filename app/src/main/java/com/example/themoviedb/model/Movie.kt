@@ -53,7 +53,8 @@ class Movie {
     }
     var baseImageUrl:String="https://image.tmdb.org/t/p/w500"
     fun getPosterPath():String{
-        return baseImageUrl+posterPath
+//        return baseImageUrl+posterPath
+        return posterPath
     }
     fun setPosterPath(posterPath: String){
         this.posterPath=posterPath

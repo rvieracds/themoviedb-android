@@ -11,8 +11,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 import com.example.themoviedb.DetailActivity
 import com.example.themoviedb.R
+import com.example.themoviedb.R.drawable
 import com.example.themoviedb.model.Movie
 
 class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -32,16 +34,19 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = movies[position].getOriginalTitle()
+        holder.overview.text = movies[position].getOverview()
         val vote = movies[position].getVoteAverage().toString()
         holder.userrating.text = vote
 
         val requestOptions = RequestOptions()
-        requestOptions.placeholder(R.drawable.load)
+        requestOptions.placeholder(drawable.load)
+        val url = "https://image.tmdb.org/t/p/w500" + movies[position].getPosterPath()
 
         Glide.with(context)
-            .load(movies[position].getPosterPath())
+            .load(url)
             .apply(requestOptions)
             .into(holder.thumbnail)
+
     }
 
     override fun getItemCount(): Int {
@@ -52,11 +57,13 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
 
         var title: TextView
         var userrating: TextView
+        var overview: TextView
         var thumbnail: ImageView
 
         init {
             title = itemView.findViewById<View>(R.id.title) as TextView
             userrating = itemView.findViewById<View>(R.id.userrating) as TextView
+            overview = itemView.findViewById<View>(R.id.overview) as TextView
             thumbnail = itemView.findViewById<View>(R.id.thumbnail) as ImageView
 
             itemView.setOnClickListener { view ->
