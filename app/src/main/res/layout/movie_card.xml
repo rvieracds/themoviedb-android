@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/card_margin"
+        android:layout_marginHorizontal="@dimen/card_margin"
+        android:layout_marginTop="@dimen/card_top_10dp"
         android:elevation="3dp"
         card_view:cardCornerRadius="@dimen/card_movie_radius">
 
@@ -22,15 +23,18 @@
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="150dp"
+                android:layout_width="110dp"
                 android:layout_height="168dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitXY" />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/card_content_margin"
+                android:layout_marginLeft="@dimen/card_content_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/thumbnail">
 
                 <LinearLayout
@@ -38,40 +42,55 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_toRightOf="@id/thumbnail">
 
                     <TextView
                         android:id="@+id/title"
-                        android:layout_width="204dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:textAlignment="gravity"
+                        android:layout_weight="1"
                         android:layout_toRightOf="@id/thumbnail"
-                        android:paddingLeft="@dimen/movie_title_padding"
-                        android:paddingTop="@dimen/movie_title_padding"
-                        android:paddingRight="@dimen/movie_title_padding"
-                        android:textColor="@color/movie_title"
-                        android:textSize="@dimen/movie_title" />
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="#0a1c24" />
 
                     <TextView
                         android:id="@+id/userrating"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_toRightOf="@id/title"
-                        android:paddingTop="@dimen/movie_title_padding"
-                        android:paddingRight="@dimen/movie_title_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
                         android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/user_rating" />
+                        android:textSize="@dimen/user_rating"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/releaseDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/movie_title_padding"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="#0a1c24"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/movie_title_padding"
-                    android:paddingTop="@dimen/movie_title_padding"
-                    android:paddingRight="@dimen/movie_title_padding"
-                    android:textColor="@color/movie_title"
-                    android:textSize="@dimen/movie_title"
+                    android:paddingTop="@dimen/movie_overview_padding"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="#091e29"
+                    android:lineSpacingExtra="2sp"
                     android:maxLines="5"/>
 
             </LinearLayout>

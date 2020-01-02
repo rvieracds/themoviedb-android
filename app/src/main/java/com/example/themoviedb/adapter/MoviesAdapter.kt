@@ -35,6 +35,7 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = movies[position].getOriginalTitle()
         holder.overview.text = movies[position].getOverview()
+        holder.releaseDate.text = movies[position].getReleaseDate()
         val vote = movies[position].getVoteAverage().toString()
         holder.userrating.text = vote
 
@@ -56,12 +57,14 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var title: TextView
+        var releaseDate: TextView
         var userrating: TextView
         var overview: TextView
         var thumbnail: ImageView
 
         init {
             title = itemView.findViewById<View>(R.id.title) as TextView
+            releaseDate = itemView.findViewById<View>(R.id.releaseDate) as TextView
             userrating = itemView.findViewById<View>(R.id.userrating) as TextView
             overview = itemView.findViewById<View>(R.id.overview) as TextView
             thumbnail = itemView.findViewById<View>(R.id.thumbnail) as ImageView

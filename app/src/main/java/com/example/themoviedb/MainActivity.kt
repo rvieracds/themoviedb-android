@@ -1,107 +1,91 @@
 package com.example.themoviedb
 
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.example.themoviedb.adapter.MoviesAdapter
-import com.example.themoviedb.api.Client
-import com.example.themoviedb.api.Service
+import com.example.themoviedb.adapter.TabsPagerAdapter
 import com.example.themoviedb.model.Movie
-import com.example.themoviedb.model.MoviesResponse
-import kotlinx.android.synthetic.main.content_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView// Extends ViewGroup implements ScrollingView, NestedScrollingChild2
     private lateinit var adapter: MoviesAdapter
-    private var movieList: List<Movie> = ArrayList()
     private lateinit var swipeContainer: SwipeRefreshLayout // Whenever the user can refresh the contents of a view via a vertical swipe gesture.
+    private var movieList: List<Movie> = ArrayList()
+
+    private lateinit var bottomNavigation: BottomNavigationView
+    private var tabLayout: TabLayout? = null
+    private var viewPager: ViewPager? = null
+    private lateinit var llProgressBar: LinearLayout
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+        when (menuItem.itemId) {
+            R.id.bottomNavigationMovies -> {
+                val fragment = PopularFragment()
+                addFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.bottomNavigationPeople -> {
+                val fragment = PeopleFragment()
+                addFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.bottomNavigationSettings -> {
+                val fragment = SettingsFragment()
+                addFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
+    private fun addFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .replace(R.id.content, fragment, fragment.javaClass.getSimpleName())
+            .addToBackStack(fragment.javaClass.getSimpleName())
+            .commit()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initViews()
+        // Set up navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        swipeContainer = findViewById(R.id.main_content)
-        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark)
-        swipeContainer.setOnRefreshListener {
-            initViews()
-            Toast.makeText(this@MainActivity, "Movies Refreshed", Toast.LENGTH_SHORT).show()
-        }
-    }
 
-    private fun initViews() {
-        llProgressBar.visibility = View.VISIBLE
+        // Set up tabs
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.viewPager)
 
-        recyclerView = findViewById(R.id.recycler_view)
-        adapter = MoviesAdapter(this@MainActivity, movieList)
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Popular"))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
+        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
-        if(baseContext.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView?.layoutManager = GridLayoutManager(this, 1)
-        } else {
-            recyclerView?.layoutManager = GridLayoutManager(this, 4)
-        }
+        val adapter = TabsPagerAdapter(supportFragmentManager, tabLayout!!.tabCount)
+        viewPager!!.adapter = adapter
+        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
-
-        loadJSON()
-    }
-
-    private fun loadJSON() {
-        try{
-            if(BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
-                Toast.makeText(applicationContext, "Obtain the API KEY first", Toast.LENGTH_SHORT).show();
-                llProgressBar.visibility = View.GONE
-                return
+        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager!!.currentItem = tab.position
             }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
 
-            val client = Client()
-            val apiService = client.getClient()!!.create(Service::class.java)
-            val call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN)
-
-            call.enqueue(object : Callback<MoviesResponse> {
-                override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
-                    if(response.isSuccessful) {
-                        val movies: List<Movie> = response.body()!!.getResults()
-                        recyclerView.adapter = MoviesAdapter(this@MainActivity, movies)
-                        recyclerView.smoothScrollToPosition(0)
-                        if (swipeContainer.isRefreshing) {
-                            swipeContainer.isRefreshing = false
-                        }
-                        llProgressBar.visibility = View.GONE
-                    } else {
-                        Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
-                    Log.d("Error PEPE 0", t.message)
-                    Toast.makeText(this@MainActivity, "Error fetching data!", Toast.LENGTH_SHORT).show();
-                }
-            })
-
-
-
-        } catch(e: Exception) {
-            Log.d("Error z", e.message)
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
