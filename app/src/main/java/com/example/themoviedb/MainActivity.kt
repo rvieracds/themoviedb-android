@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.content, fragment, fragment.javaClass.getSimpleName())
-            .addToBackStack(fragment.javaClass.getSimpleName())
+            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .addToBackStack(fragment.javaClass.simpleName)
             .commit()
     }
 
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-
         // Set up tabs
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
@@ -74,17 +73,21 @@ class MainActivity : AppCompatActivity() {
         tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
-        val adapter = TabsPagerAdapter(supportFragmentManager, tabLayout!!.tabCount)
-        viewPager!!.adapter = adapter
-        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
-        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                viewPager!!.currentItem = tab.position
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
+//        val adapter = TabsPagerAdapter(supportFragmentManager, tabLayout!!.tabCount)
+//        viewPager!!.adapter = adapter
+//        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+//
+//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab) {
+//                viewPager!!.currentItem = tab.position
+//            }
+//            override fun onTabUnselected(tab: TabLayout.Tab) {}
+//            override fun onTabReselected(tab: TabLayout.Tab) {}
+//        })
+
+        val fragment = PopularFragment()
+        addFragment(fragment)
 
     }
 
@@ -94,9 +97,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.getItemId()) {
-            R.id.menu_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when(item.itemId) {
+            R.id.menu_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
