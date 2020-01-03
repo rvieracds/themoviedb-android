@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.example.themoviedb.adapter.MoviesAdapter
+import com.example.themoviedb.adapter.TabsPagerAdapter
 import com.example.themoviedb.api.Client
 import com.example.themoviedb.api.Service
 import com.example.themoviedb.model.Movie
 import com.example.themoviedb.model.MoviesResponse
+import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +35,9 @@ class PopularFragment : Fragment() {
     private var movieList: List<Movie> = ArrayList()
     private lateinit var llProgressBar: LinearLayout
 
+    private var tabLayout: TabLayout? = null
+    private var viewPager: ViewPager? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +47,28 @@ class PopularFragment : Fragment() {
         recyclerView = rootView.findViewById(R.id.recycler_view)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
         swipeContainer = rootView.findViewById(R.id.main_content)
+
+//        // Set up tabs
+//        tabLayout = rootView.findViewById(R.id.tabLayout)
+//        viewPager = rootView.findViewById(R.id.viewPager)
+//
+//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Popular"))
+//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
+//        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
+//
+//
+//        val adapter = activity?.supportFragmentManager?.let { TabsPagerAdapter(it, tabLayout!!.tabCount) }
+////        val adapter = TabsPagerAdapter(childFragmentManager, tabLayout!!.tabCount)
+//        viewPager!!.adapter = adapter
+//        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+//
+//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab) {
+//                viewPager!!.currentItem = tab.position
+//            }
+//            override fun onTabUnselected(tab: TabLayout.Tab) {}
+//            override fun onTabReselected(tab: TabLayout.Tab) {}
+//        })
 
         initViews()
 
@@ -112,6 +140,5 @@ class PopularFragment : Fragment() {
             Toast.makeText(activity?.applicationContext, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
 
 }

@@ -2,59 +2,90 @@ package com.example.themoviedb.model
 
 import com.google.gson.annotations.SerializedName
 
-class Movie {
+class KnownFor {
+
     @SerializedName("poster_path")
-    private lateinit var posterPath:String
+    private var posterPath: String
+
     @SerializedName("adult")
-    private  var adult:Boolean = false
+    private var adult: Boolean = false
+
     @SerializedName("overview")
-    private lateinit var overview:String
+    private var overview: String
+
     @SerializedName("release_date")
-    private lateinit var releaseDate:String
-    @SerializedName("genre_ids")
-    private var genreIds:List<Int> = ArrayList()
-    @SerializedName("id")
-    private  var id:Int=1
+    private var releaseDate: String
+
     @SerializedName("original_title")
-    private lateinit var originalTitle:String
+    private var originalTitle: String
+
+    @SerializedName("genre_ids")
+    private var genreIds: List<Int>
+
+    @SerializedName("id")
+    private var id: Int=1
+
+    @SerializedName("media_type")
+    private var mediaType: String
+
     @SerializedName("original_language")
-    private lateinit var originalLanguage:String
+    private var originalLanguage: String
+
     @SerializedName("title")
-    private lateinit var title:String
+    private var title: String
+
     @SerializedName("backdrop_path")
-    private lateinit var backdropPath:String
+    private var backdropPath: String
+
     @SerializedName("popularity")
     private var popularity:Double=0.0
+
     @SerializedName("vote_count")
     private  var voteCount:Int=1
+
     @SerializedName("video")
-    private  var video:Boolean = false
+    private var video: Boolean = false
+
     @SerializedName("vote_average")
     private var voteAverage:Double=0.0
 
-    constructor(posterPath: String, adult: Boolean,overview:String,releaseDate:String,
-                genreIds:List<Int>,id:Int,originalTitle:String, originalLanguage:String,
-                title:String, backdropPath:String,popularity:Double,
-                voteCount:Int,video:Boolean,voteAverage:Double) {
-        this.posterPath=posterPath
-        this.adult=adult
-        this.overview=overview
-        this.releaseDate=releaseDate
-        this.genreIds=genreIds
-        this.id=id
-        this.originalTitle=originalTitle
-        this.originalLanguage=originalLanguage
-        this.title=title
-        this.backdropPath=backdropPath
-        this.popularity=popularity
-        this.voteAverage=voteAverage
-        this.voteCount=voteCount
-        this.video=video
+    constructor(
+        posterPath: String,
+        adult: Boolean,
+        overview: String,
+        releaseDate: String,
+        originalTitle: String,
+        genreIds: List<Int>,
+        id: Int,
+        mediaType: String,
+        originalLanguage: String,
+        title: String,
+        backdropPath: String,
+        popularity: Double,
+        voteCount: Int,
+        video: Boolean,
+        voteAverage: Double
+    ) {
+        this.posterPath = posterPath
+        this.adult = adult
+        this.overview = overview
+        this.releaseDate = releaseDate
+        this.originalTitle = originalTitle
+        this.genreIds = genreIds
+        this.id = id
+        this.mediaType = mediaType
+        this.originalLanguage = originalLanguage
+        this.title = title
+        this.backdropPath = backdropPath
+        this.popularity = popularity
+        this.voteCount = voteCount
+        this.video = video
+        this.voteAverage = voteAverage
     }
 
     var baseImageUrl:String="https://image.tmdb.org/t/p/w500"
+
     fun getPosterPath():String{
-//        return baseImageUrl+posterPath
         return posterPath
     }
     fun setPosterPath(posterPath: String){

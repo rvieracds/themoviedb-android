@@ -7,17 +7,12 @@ import com.example.themoviedb.PopularFragment
 import com.example.themoviedb.TopRatedFragment
 
 class TabsPagerAdapter(fragmentManager: FragmentManager, private var tabCount: Int) :
-    FragmentPagerAdapter(fragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> {
-                PopularFragment()
-            }
-            1 -> {
-                TopRatedFragment()
-            }
-
+            0 -> PopularFragment()
+            1 -> TopRatedFragment()
             else -> PopularFragment()
         }
     }
