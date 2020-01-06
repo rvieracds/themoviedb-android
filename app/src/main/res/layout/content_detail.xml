@@ -1,82 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-    android:background="@color/viewBg"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    android:paddingBottom="24dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DetailActivity"
+    tools:layout_editor_absoluteX="16dp"
+    tools:layout_editor_absoluteY="400dp"
     tools:showIn="@layout/activity_detail">
 
-    <ScrollView
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="32dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="sans-serif"
+            android:textColor="#0a1c24"
+            android:textSize="34sp"
+            android:layout_weight="1"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="34sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:textColor="#0a1c24"/>
+        <ImageView
+            android:id="@+id/infoButton"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_weight="0"
+            android:clickable="true"
+            android:src="@mipmap/info_button"
+            android:focusable="true" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:textColor="#0a1c24"
-                tools:text="User Score" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="normal"
-                android:textColor="#0a1c24"
-                android:id="@+id/userrating"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textColor="#0a1c24"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="User Score" />
 
-            <TextView
-                android:id="@+id/overviewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:textColor="#0a1c24"
-                tools:text="Overview" />
+        <TextView
+            android:id="@+id/rateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="#01d277"
+            android:text="Rate" />
 
-            <TextView
-                android:id="@+id/movieoverview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="normal"
-                android:textColor="#0a1c24"
-                android:maxLines="3"/>
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:textColor="#0a1c24"
-                android:letterSpacing="-0.02"
-                tools:text="Top Billed Cast" />
+    <TextView
+        android:id="@+id/userrating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#0a1c24"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        android:textStyle="normal" />
 
-        </LinearLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/overviewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#0a1c24"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Overview" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/movieoverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:maxLines="3"
+        android:textColor="#0a1c24"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="#01d277"
+        android:text="Read more" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="-0.02"
+        android:textColor="#0a1c24"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Top Billed Cast" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_cast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="13dp"
+        android:textStyle="bold"
+        android:textColor="#01d277"
+        android:text="View Full Cast &amp; Crew" />
+
+</LinearLayout>
