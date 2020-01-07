@@ -11,10 +11,10 @@
     android:orientation="vertical"
     android:paddingBottom="24dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.DetailActivity"
+    tools:context=".fragments.PeopleDetailFragment"
     tools:layout_editor_absoluteX="16dp"
     tools:layout_editor_absoluteY="400dp"
-    tools:showIn="@layout/activity_detail">
+    tools:showIn="@layout/fragment_people_detail">
 
     <include
         android:id="@+id/llProgressBar"
@@ -29,7 +29,7 @@
         android:layout_marginTop="32dp" >
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/actorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -48,76 +48,6 @@
             android:focusable="true" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#0a1c24"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="User Score" />
-
-        <TextView
-            android:id="@+id/rateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:clickable="true"
-            android:layout_marginLeft="16dp"
-            android:fontFamily="sans-serif"
-            android:textStyle="bold"
-            android:textColor="#01d277"
-            android:text="Rate" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/userrating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="#0a1c24"
-        android:layout_marginTop="8dp"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/overviewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textColor="#0a1c24"
-        android:layout_marginTop="32dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Overview" />
-
-    <TextView
-        android:id="@+id/movieoverview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:maxLines="3"
-        android:textColor="#0a1c24"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:textColor="#01d277"
-        android:text="Read more" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,10 +57,10 @@
         android:layout_marginTop="32dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:text="Top Billed Cast" />
+        android:text="Known for" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_cast"
+        android:id="@+id/recycler_view_knownFor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -150,6 +80,37 @@
         android:layout_marginTop="13dp"
         android:textStyle="bold"
         android:textColor="#01d277"
-        android:text="View Full Cast &amp; Crew" />
+        android:text="View all" />
+
+    <TextView
+        android:id="@+id/bioTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#0a1c24"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Biography" />
+
+    <TextView
+        android:id="@+id/actorBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#0b3049"
+        android:lineSpacingExtra="5sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="#01d277"
+        android:text="Read more" />
 
 </LinearLayout>

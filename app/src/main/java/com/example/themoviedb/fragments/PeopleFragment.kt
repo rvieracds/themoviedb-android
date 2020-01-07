@@ -1,4 +1,5 @@
-package com.example.themoviedb
+package com.example.themoviedb.fragments
+
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -13,23 +14,23 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.themoviedb.adapter.MoviesAdapter
-import com.example.themoviedb.adapter.TabsPagerAdapter
+import com.example.themoviedb.BuildConfig
+import com.example.themoviedb.R
+import com.example.themoviedb.adapter.PeopleAdapter
 import com.example.themoviedb.api.Client
 import com.example.themoviedb.api.Service
-import com.example.themoviedb.model.Movie
-import com.example.themoviedb.model.MoviesResponse
-import com.google.android.material.tabs.TabLayout
+import com.example.themoviedb.model.People
+import com.example.themoviedb.model.PeopleResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TopRatedFragment : Fragment() {
+class PeopleFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView// Extends ViewGroup implements ScrollingView, NestedScrollingChild2
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var adapter: PeopleAdapter
     private lateinit var swipeContainer: SwipeRefreshLayout // Whenever the user can refresh the contents of a view via a vertical swipe gesture.
-    private var movieList: List<Movie> = ArrayList()
+    private var peopleList: List<People> = ArrayList()
     private lateinit var llProgressBar: LinearLayout
 
     override fun onCreateView(
@@ -37,40 +38,18 @@ class TopRatedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_top_rated, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_people, container, false)
 
         recyclerView = rootView.findViewById(R.id.recycler_view)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
         swipeContainer = rootView.findViewById(R.id.main_content)
-
-//        // Set up tabs
-//        tabLayout = rootView.findViewById(R.id.tabLayout)
-//        viewPager = rootView.findViewById(R.id.viewPager)
-//
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Popular"))
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
-//        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-
-
-//        val adapter = activity?.supportFragmentManager?.let { TabsPagerAdapter(it, tabLayout!!.tabCount) }
-////        val adapter = TabsPagerAdapter(childFragmentManager, tabLayout!!.tabCount)
-//        viewPager!!.adapter = adapter
-//        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-//
-//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab) {
-//                viewPager!!.currentItem = tab.position
-//            }
-//            override fun onTabUnselected(tab: TabLayout.Tab) {}
-//            override fun onTabReselected(tab: TabLayout.Tab) {}
-//        })
 
         initViews()
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark)
         swipeContainer.setOnRefreshListener {
             initViews()
-            Toast.makeText(activity?.applicationContext, "Movies Refreshed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity?.applicationContext, "People Refreshed", Toast.LENGTH_SHORT).show()
         }
 
         return rootView
@@ -79,12 +58,10 @@ class TopRatedFragment : Fragment() {
     private fun initViews() {
         llProgressBar!!.visibility = View.VISIBLE
 
-        adapter = activity?.applicationContext?.let { MoviesAdapter(it, movieList) }!!
+        adapter = activity?.applicationContext?.let { PeopleAdapter(it, peopleList) }!!
 
         if(activity?.applicationContext!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             recyclerView?.layoutManager = GridLayoutManager(activity?.applicationContext, 1)
-        } else {
-            recyclerView?.layoutManager = GridLayoutManager(activity?.applicationContext, 4)
         }
 
         recyclerView.itemAnimator = DefaultItemAnimator()
@@ -104,14 +81,14 @@ class TopRatedFragment : Fragment() {
 
             val client = Client()
             val apiService = client.getClient()!!.create(Service::class.java)
-            val call = apiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN)
+            val call = apiService.getPopularPeople(BuildConfig.THE_MOVIE_DB_API_TOKEN)
 
-            call.enqueue(object : Callback<MoviesResponse> {
-                override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) =
+            call.enqueue(object : Callback<PeopleResponse> {
+                override fun onResponse(call: Call<PeopleResponse>, response: Response<PeopleResponse>) =
                     if(response.isSuccessful) {
-                        val movies: List<Movie> = response.body()!!.getResults()
+                        val people: List<People> = response.body()!!.getResults()
                         recyclerView.adapter =
-                            activity?.applicationContext?.let { MoviesAdapter(it, movies) }
+                            activity?.applicationContext?.let { PeopleAdapter(it, people) }
                         recyclerView.smoothScrollToPosition(0)
 
                         if (swipeContainer.isRefreshing) {
@@ -122,19 +99,15 @@ class TopRatedFragment : Fragment() {
                         Toast.makeText(activity?.applicationContext, "Error fetching data!", Toast.LENGTH_SHORT).show();
                     }
 
-                override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                override fun onFailure(call: Call<PeopleResponse>, t: Throwable) {
                     Log.d("Error PEPE 0", t.message)
                     Toast.makeText(activity?.applicationContext, "Error fetching data!", Toast.LENGTH_SHORT).show();
                 }
             })
-
-
-
         } catch(e: Exception) {
             Log.d("Error z", e.message)
             Toast.makeText(activity?.applicationContext, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
 
 }

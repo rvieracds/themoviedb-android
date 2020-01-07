@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-import com.example.themoviedb.DetailActivity
+import com.example.themoviedb.activities.DetailActivity
 import com.example.themoviedb.R
 import com.example.themoviedb.R.drawable
 import com.example.themoviedb.model.Movie
@@ -74,6 +74,7 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
                 if (pos != RecyclerView.NO_POSITION) {
                     val clickedDataItem = movies[pos]
                     val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("id", movies[pos].getId())
                     intent.putExtra("original_title", movies[pos].getOriginalTitle())
                     intent.putExtra("poster_path", movies[pos].getPosterPath())
                     intent.putExtra("overview", movies[pos].getOverview())

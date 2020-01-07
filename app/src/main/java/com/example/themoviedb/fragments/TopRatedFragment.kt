@@ -1,5 +1,4 @@
-package com.example.themoviedb
-
+package com.example.themoviedb.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -9,25 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.ViewPager
+import com.example.themoviedb.BuildConfig
+import com.example.themoviedb.R
 import com.example.themoviedb.adapter.MoviesAdapter
-import com.example.themoviedb.adapter.TabsPagerAdapter
 import com.example.themoviedb.api.Client
 import com.example.themoviedb.api.Service
 import com.example.themoviedb.model.Movie
 import com.example.themoviedb.model.MoviesResponse
-import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PopularFragment : Fragment() {
+class TopRatedFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView// Extends ViewGroup implements ScrollingView, NestedScrollingChild2
     private lateinit var adapter: MoviesAdapter
@@ -35,14 +32,12 @@ class PopularFragment : Fragment() {
     private var movieList: List<Movie> = ArrayList()
     private lateinit var llProgressBar: LinearLayout
 
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_popular, container, false)
+        // Inflate the layout for this fragment
+        val rootView = inflater.inflate(R.layout.fragment_top_rated, container, false)
 
         recyclerView = rootView.findViewById(R.id.recycler_view)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
@@ -55,8 +50,8 @@ class PopularFragment : Fragment() {
 //        tabLayout!!.addTab(tabLayout!!.newTab().setText("Popular"))
 //        tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
 //        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-//
-//
+
+
 //        val adapter = activity?.supportFragmentManager?.let { TabsPagerAdapter(it, tabLayout!!.tabCount) }
 ////        val adapter = TabsPagerAdapter(childFragmentManager, tabLayout!!.tabCount)
 //        viewPager!!.adapter = adapter
@@ -109,7 +104,7 @@ class PopularFragment : Fragment() {
 
             val client = Client()
             val apiService = client.getClient()!!.create(Service::class.java)
-            val call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN)
+            val call = apiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN)
 
             call.enqueue(object : Callback<MoviesResponse> {
                 override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) =
@@ -140,5 +135,6 @@ class PopularFragment : Fragment() {
             Toast.makeText(activity?.applicationContext, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

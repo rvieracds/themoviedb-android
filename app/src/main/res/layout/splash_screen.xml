@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/splash_screen_background"
     android:gravity="center"
-    tools:context=".SplashActivity">
+    tools:context=".activities.SplashActivity">
 
     <ImageView
         android:id="@+id/splash_screen_logo"

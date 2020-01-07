@@ -6,17 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.themoviedb.R
+import com.example.themoviedb.model.Cast
 
-
-class CastAdapter(context: Context, cast: List<Actor>) : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
+class CastAdapter(context: Context, cast: List<Cast>) : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
     private var context: Context
-    private var cast: List<Actor> = ArrayList()
+    private var cast: List<Cast> = ArrayList()
 
     init {
         this.cast = cast
@@ -29,11 +28,11 @@ class CastAdapter(context: Context, cast: List<Actor>) : RecyclerView.Adapter<Ca
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.actorName.text = cast[position].getName()
+        holder.actorName.text = cast[position].name
 
         val requestOptions = RequestOptions()
         requestOptions.placeholder(R.drawable.load)
-        val url = "https://image.tmdb.org/t/p/w500" + cast[position].getActorPath()
+        val url = "https://image.tmdb.org/t/p/w500" + cast[position].profilePath
 
         Glide.with(context)
             .load(url)
@@ -47,7 +46,6 @@ class CastAdapter(context: Context, cast: List<Actor>) : RecyclerView.Adapter<Ca
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var actorName: TextView = itemView.findViewById<View>(R.id.actorName) as TextView
         var actorPic: ImageView = itemView.findViewById<View>(R.id.actorPic) as ImageView
 
@@ -70,76 +68,7 @@ class CastAdapter(context: Context, cast: List<Actor>) : RecyclerView.Adapter<Ca
 //        }
 
     }
+
+
 }
 
-
-
-
-//class CastAdapter(private var cast: List<MovieInfoCast>) : RecyclerView.Adapter<CastAdapter.MovieViewHolder>() {
-//
-//    fun addAll(cast: List<MovieInfoCast>) {
-//        this.cast = cast
-//        notifyDataSetChanged()
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-//        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_detail_actor_list_element, parent, false)
-//
-//        return MovieViewHolder(itemView)
-//    }
-//
-//    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-//        val actor = cast[position]
-//        holder.name.text = actor.name
-//        holder.character.text = actor.character
-//
-//
-//
-//
-//
-//
-//        holder.name.text = people[position].getName()
-//        val knownForList = people[position].getKnownFor()
-//
-//        var knownForText = "<b>Known for: </b>"
-//        for ((i, item) in knownForList.withIndex()) {
-//            if (i != knownForList.lastIndex){
-//                knownForText += item.getOriginalTitle() + ", "
-//            } else {
-//                knownForText += item.getOriginalTitle()
-//            }
-//        }
-//
-//        holder.knownFor.text = HtmlCompat.fromHtml(knownForText, HtmlCompat.FROM_HTML_MODE_LEGACY);
-//
-//        val requestOptions = RequestOptions()
-//        requestOptions.placeholder(R.drawable.load)
-//        val url = "https://image.tmdb.org/t/p/w500" + people[position].getProfilePath()
-//
-//        Glide.with(context)
-//            .load(url)
-//            .apply(requestOptions)
-//            .into(holder.profilePic)
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return cast.size
-//    }
-//
-//    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        var character: TextView = itemView.findViewById(R.id.actor_list_item_character) as TextView
-//        var name: TextView = itemView.findViewById(R.id.actorName) as TextView
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    }
-//}

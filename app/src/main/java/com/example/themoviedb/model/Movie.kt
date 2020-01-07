@@ -72,6 +72,12 @@ class Movie {
     fun setOverview(overview:String){
         this.overview=overview
     }
+    fun getId():Int{
+        return id
+    }
+    fun setId(id:Int){
+        this.id=id
+    }
     fun getReleaseDate():String{
         return releaseDate
     }

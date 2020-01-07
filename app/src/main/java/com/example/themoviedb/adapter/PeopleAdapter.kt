@@ -1,21 +1,22 @@
 package com.example.themoviedb.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.themoviedb.fragments.PeopleDetailFragment
 import com.example.themoviedb.R
-import com.example.themoviedb.model.KnownFor
 import com.example.themoviedb.model.People
+
 
 class PeopleAdapter(context: Context, people: List<People>) : RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
@@ -68,23 +69,32 @@ class PeopleAdapter(context: Context, people: List<People>) : RecyclerView.Adapt
         var knownFor: TextView = itemView.findViewById<View>(R.id.knownFor) as TextView
         var profilePic: ImageView = itemView.findViewById<View>(R.id.profilePic) as ImageView
 
-//        init {
-//            itemView.setOnClickListener { view ->
-//                val pos = adapterPosition
-//                if (pos != RecyclerView.NO_POSITION) {
-//                    val clickedDataItem = people[pos]
-//                    val intent = Intent(context, DetailActivity::class.java)
-//                    intent.putExtra("original_title", people[pos].getOriginalTitle())
-//                    intent.putExtra("poster_path", people[pos].getPosterPath())
-//                    intent.putExtra("overview", people[pos].getOverview())
-//                    intent.putExtra("vote_average", people[pos].getVoteAverage())
-//                    intent.putExtra("release_date", people[pos].getReleaseDate())
+        init {
+            itemView.setOnClickListener { view ->
+                val pos = adapterPosition
+                if (pos != RecyclerView.NO_POSITION) {
+                    val clickedDataItem = people[pos]
+
+                    val activity = view.context as AppCompatActivity
+                    val fragment: Fragment =
+                        PeopleDetailFragment()
+                    activity.supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment).addToBackStack(null).commit()
+
+
+
+//                    val intent = Intent(context, PeopleInfoFragment::class.java)
+////                    intent.putExtra("original_title", people[pos].getOriginalTitle())
+////                    intent.putExtra("poster_path", people[pos].getPosterPath())
+////                    intent.putExtra("overview", people[pos].getOverview())
+////                    intent.putExtra("vote_average", people[pos].getVoteAverage())
+////                    intent.putExtra("release_date", people[pos].getReleaseDate())
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 //                    context.startActivity(intent)
-//                    Toast.makeText(view.context, "You clicked" + clickedDataItem.getOriginalTitle(), Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        }
+                    Toast.makeText(view.context, "You clicked" + clickedDataItem.getName(), Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
     }
 }

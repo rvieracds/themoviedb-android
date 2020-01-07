@@ -1,19 +1,14 @@
-package com.example.themoviedb
+package com.example.themoviedb.activities
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.ViewPager
-import com.example.themoviedb.adapter.MoviesAdapter
-import com.example.themoviedb.adapter.TabsPagerAdapter
-import com.example.themoviedb.model.Movie
+import com.example.themoviedb.*
+import com.example.themoviedb.fragments.PeopleFragment
+import com.example.themoviedb.fragments.PopularFragment
+import com.example.themoviedb.fragments.SettingsFragment
+import com.example.themoviedb.fragments.TopRatedFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +35,8 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.bottomNavigationSettings -> {
-                val fragment = SettingsFragment()
+                val fragment =
+                    SettingsFragment()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -51,7 +47,10 @@ class MainActivity : AppCompatActivity() {
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .setCustomAnimations(
+                R.anim.design_bottom_sheet_slide_in,
+                R.anim.design_bottom_sheet_slide_out
+            )
             .replace(R.id.content, fragment, fragment.javaClass.simpleName)
             .addToBackStack(fragment.javaClass.simpleName)
             .commit()
