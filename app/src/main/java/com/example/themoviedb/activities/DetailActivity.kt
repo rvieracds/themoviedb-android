@@ -26,7 +26,7 @@ import com.example.themoviedb.model.Cast
 import com.example.themoviedb.model.MovieCreditResponse
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import kotlinx.android.synthetic.main.content_detail.*
+import kotlinx.android.synthetic.main.movie_content_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

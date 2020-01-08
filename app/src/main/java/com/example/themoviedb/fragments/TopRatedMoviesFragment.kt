@@ -24,7 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TopRatedFragment : Fragment() {
+class TopRatedMoviesFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView// Extends ViewGroup implements ScrollingView, NestedScrollingChild2
     private lateinit var adapter: MoviesAdapter
@@ -37,7 +37,7 @@ class TopRatedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_top_rated, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_top_rated_movies, container, false)
 
         recyclerView = rootView.findViewById(R.id.recycler_view)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)

@@ -23,8 +23,7 @@ interface Service {
     @GET("person/popular")
     fun getPopularPeople(@Query("api_key") apiKey: String): Call<PeopleResponse>
 
-    @GET("person/{id}")
+//    @GET("person/{id}")
 //    fun getActorDetails(@Path("id") id: Int, @Query("api_key") apiKey: String): Call<ActorDetailsResponse>
-
 
 }

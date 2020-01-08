@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation">
+
+    <!--    MOVIES    -->
+
+    <fragment
+        android:id="@+id/MoviesFragment"
+        android:name="com.example.themoviedb.fragments.MoviesFragment"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies">
+
+        <action
+            android:id="@+id/action_tab_1_to_content"
+            app:destination="@id/PopularMoviesFragment" />
+
+        <action
+            android:id="@+id/action_tab_2_to_content"
+            app:destination="@id/TopRatedMoviesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PopularMoviesFragment"
+        android:name="com.example.themoviedb.fragments.PopularMoviesFragment"
+        android:label="fragment_popular_movies"
+        tools:layout="@layout/fragment_popular_movies">
+
+        <action
+            android:id="@+id/action_view_popular_movie_detail"
+            app:destination="@id/MovieDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/TopRatedMoviesFragment"
+        android:name="com.example.themoviedb.fragments.TopRatedMoviesFragment"
+        android:label="fragment_top_rated_movies"
+        tools:layout="@layout/fragment_top_rated_movies">
+
+        <action
+            android:id="@+id/action_view_top_rated_movie_detail"
+            app:destination="@id/MovieDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MovieDetailFragment"
+        android:name="com.example.themoviedb.fragments.MovieDetailFragment"
+        android:label="fragment_movie_info"
+        tools:layout="@layout/fragment_movie_detail">
+
+        <action
+            android:id="@+id/action_view_movie_info"
+            app:destination="@id/MovieInfoFragment" />
+
+        <action
+            android:id="@+id/action_view_rate_movie"
+            app:destination="@id/RateMovieFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MovieInfoFragment"
+        android:name="com.example.themoviedb.fragments.MovieInfoFragment"
+        android:label="fragment_movie_info"
+        tools:layout="@layout/fragment_movie_info">
+    </fragment>
+
+    <fragment
+        android:id="@+id/RateMovieFragment"
+        android:name="com.example.themoviedb.fragments.RateMovieFragment"
+        android:label="fragment_rate_movie"
+        tools:layout="@layout/fragment_rate_movie">
+    </fragment>
+
+
+    <!--    PEOPLE    -->
+
+    <fragment
+        android:id="@+id/PeopleFragment"
+        android:name="com.example.themoviedb.fragments.PeopleFragment"
+        android:label="fragment_people"
+        tools:layout="@layout/fragment_people">
+
+        <action
+            android:id="@+id/action_view_people_detail"
+            app:destination="@id/PeopleDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PeopleDetailFragment"
+        android:name="com.example.themoviedb.fragments.PeopleDetailFragment"
+        android:label="fragment_people_detail"
+        tools:layout="@layout/fragment_people_detail">
+
+        <action
+            android:id="@+id/action_view_people_info"
+            app:destination="@id/PeopleInfoFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PeopleInfoFragment"
+        android:name="com.example.themoviedb.fragments.PeopleInfoFragment"
+        android:label="fragment_people_info"
+        tools:layout="@layout/fragment_people_info">
+    </fragment>
+
+
+    <!--    SETTINGS    -->
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.themoviedb.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
+
+</navigation>
