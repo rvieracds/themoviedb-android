@@ -3,6 +3,7 @@ package com.example.themoviedb.api
 import com.example.themoviedb.model.MovieCreditResponse
 import com.example.themoviedb.model.MoviesResponse
 import com.example.themoviedb.model.PeopleResponse
+import com.example.themoviedb.model.PersonDetailsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,7 +24,7 @@ interface Service {
     @GET("person/popular")
     fun getPopularPeople(@Query("api_key") apiKey: String): Call<PeopleResponse>
 
-//    @GET("person/{id}")
-//    fun getActorDetails(@Path("id") id: Int, @Query("api_key") apiKey: String): Call<ActorDetailsResponse>
+    @GET("person/{id}")
+    fun getPersonDetails(@Path("id") id: Int, @Query("api_key") apiKey: String): Call<PersonDetailsResponse>
 
 }

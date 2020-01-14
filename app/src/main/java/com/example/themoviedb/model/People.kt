@@ -19,9 +19,9 @@ class People {
     private var popularity: Double=0.0
 
     @SerializedName("known_for")
-    private var knownFor: List<KnownFor> = ArrayList()
+    private var knownFor: ArrayList<KnownFor> = ArrayList()
 
-    constructor(profilePath: String, adult: Boolean, name: String, knownFor: List<KnownFor>, id:Int, popularity: Double) {
+    constructor(profilePath: String, adult: Boolean, name: String, knownFor: ArrayList<KnownFor>, id:Int, popularity: Double) {
         this.profilePath=profilePath
         this.adult=adult
         this.name=name
@@ -30,39 +30,44 @@ class People {
         this.popularity=popularity
     }
 
-    fun getProfilePath():String{
+    fun getProfilePath(): String{
         return profilePath
     }
     fun setProfilePath(profilePath: String){
         this.profilePath=profilePath
     }
 
-    fun isAdult():Boolean{
+    fun isAdult(): Boolean{
         return adult
     }
     fun setAdult(adult: Boolean){
         this.adult=adult
     }
 
-    fun getName():String{
+    fun getName(): String{
         return name
     }
-    fun setName(name:String){
+    fun setName(name: String){
         this.name=name
     }
 
-    fun getKnownFor():List<KnownFor>{
+    fun getKnownFor(): ArrayList<KnownFor>{
         return knownFor
     }
-    fun setKnownFor(knownFor:List<KnownFor>){
+    fun setKnownFor(knownFor: ArrayList<KnownFor>){
         this.knownFor=knownFor
     }
 
-    fun getPopularity():Double{
+    fun getPopularity(): Double{
         return popularity
     }
-    fun setPopularity(popularity:Double){
+    fun setPopularity(popularity: Double){
         this.popularity=popularity
     }
-
+    fun getId(): Int{
+        return id
+    }
+    fun setId(id: Int){
+        this.id=id
+    }
 }

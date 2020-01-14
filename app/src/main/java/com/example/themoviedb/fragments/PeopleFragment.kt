@@ -4,12 +4,12 @@ package com.example.themoviedb.fragments
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +31,10 @@ class PeopleFragment : Fragment() {
     private lateinit var adapter: PeopleAdapter
     private lateinit var swipeContainer: SwipeRefreshLayout // Whenever the user can refresh the contents of a view via a vertical swipe gesture.
     private var peopleList: List<People> = ArrayList()
+    private lateinit var contentPeoplePage: SwipeRefreshLayout
     private lateinit var llProgressBar: LinearLayout
+    private var searchView: SearchView? = null
+    private var title: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +55,20 @@ class PeopleFragment : Fragment() {
             Toast.makeText(activity?.applicationContext, "People Refreshed", Toast.LENGTH_SHORT).show()
         }
 
+        // Set up search view
+        searchView = rootView.findViewById(R.id.searchView)
+        title = rootView.findViewById(R.id.fragmentTitle)
+
+        searchView!!.setOnSearchClickListener {
+            val query = searchView!!.query.toString()
+            title!!.visibility = View.GONE
+        }
+
+        searchView!!.setOnCloseListener {
+            title!!.visibility = View.VISIBLE
+            false
+        }
+
         return rootView
     }
 
@@ -69,6 +86,16 @@ class PeopleFragment : Fragment() {
         adapter.notifyDataSetChanged()
 
         loadJSON()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem =  menu.findItem(R.id.action_search)
+        // Optional: if you want to expand SearchView from icon to edittext view
+        searchItem.expandActionView()
+
+        val searchView = searchItem.actionView as SearchView
     }
 
     private fun loadJSON() {

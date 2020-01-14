@@ -43,7 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:theme="@style/ToolbarTheme" />
+                app:theme="@style/ToolbarTheme" >
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -55,7 +57,9 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/movie_content_detail"/>
+        <include
+            android:id="@+id/movie_content_detail"
+            layout="@layout/movie_content_detail"/>
 
     </androidx.core.widget.NestedScrollView>
 

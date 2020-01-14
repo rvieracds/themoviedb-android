@@ -98,6 +98,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:maxLines="3"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="#0b3049"
@@ -109,8 +111,10 @@
         android:textSize="14sp"
         android:fontFamily="sans-serif"
         android:layout_marginTop="8dp"
+        android:clickable="true"
         android:textStyle="bold"
         android:textColor="#01d277"
-        android:text="Read more" />
+        android:text="Read more"
+        android:focusable="true" />
 
 </LinearLayout>

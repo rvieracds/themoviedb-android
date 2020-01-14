@@ -1,21 +1,24 @@
 package com.example.themoviedb.adapter
 
 import android.content.Context
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-
-import com.example.themoviedb.activities.DetailActivity
 import com.example.themoviedb.R
 import com.example.themoviedb.R.drawable
 import com.example.themoviedb.model.Movie
+import com.google.android.material.internal.ContextUtils.getActivity
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
@@ -73,15 +76,17 @@ class MoviesAdapter(context: Context, movies: List<Movie>) : RecyclerView.Adapte
                 val pos = adapterPosition
                 if (pos != RecyclerView.NO_POSITION) {
                     val clickedDataItem = movies[pos]
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("id", movies[pos].getId())
-                    intent.putExtra("original_title", movies[pos].getOriginalTitle())
-                    intent.putExtra("poster_path", movies[pos].getPosterPath())
-                    intent.putExtra("overview", movies[pos].getOverview())
-                    intent.putExtra("vote_average", movies[pos].getVoteAverage())
-                    intent.putExtra("release_date", movies[pos].getReleaseDate())
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
+                    val data = Bundle()
+
+                    data.putInt("id", movies[pos].getId())
+                    data.putString("original_title", movies[pos].getOriginalTitle())
+                    data.putString("poster_path", movies[pos].getPosterPath())
+                    data.putString("overview",  movies[pos].getOverview())
+                    data.putDouble("vote_average", movies[pos].getVoteAverage())
+                    data.putString("release_date", movies[pos].getReleaseDate())
+
+                    val activity = view.context as AppCompatActivity
+                    Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.MovieDetailFragment, data)
                     Toast.makeText(view.context, "You clicked" + clickedDataItem.getOriginalTitle(), Toast.LENGTH_LONG).show()
                 }
             }

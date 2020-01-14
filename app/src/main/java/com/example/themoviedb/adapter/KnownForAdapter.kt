@@ -10,44 +10,44 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.themoviedb.R
-import com.example.themoviedb.model.Cast
+import com.example.themoviedb.model.KnownFor
 
-class CastAdapter(context: Context, cast: List<Cast>) : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
+class KnownForAdapter(context: Context, knownFor: ArrayList<KnownFor>) : RecyclerView.Adapter<KnownForAdapter.ViewHolder>() {
 
     private var context: Context
-    private var cast: List<Cast> = ArrayList()
+    private var knownFor: ArrayList<KnownFor> = ArrayList()
 
     init {
-        this.cast = cast
+        this.knownFor = knownFor
         this.context = context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v : View = LayoutInflater.from(parent.context).inflate(R.layout.cast_card, parent, false)
+        val v : View = LayoutInflater.from(parent.context).inflate(R.layout.known_for_card, parent, false)
         return ViewHolder(itemView = v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.actorName.text = cast[position].name
+        holder.actorName.text = knownFor[position].getOriginalTitle()
 
         val requestOptions = RequestOptions()
         requestOptions.placeholder(R.drawable.load)
-        val url = "https://image.tmdb.org/t/p/w500" + cast[position].profilePath
+        val url = "https://image.tmdb.org/t/p/w500" + knownFor[position].getPosterPath()
 
         Glide.with(context)
             .load(url)
             .apply(requestOptions)
-            .into(holder.actorPic)
+            .into(holder.moviePic)
 
     }
 
     override fun getItemCount(): Int {
-        return cast.size
+        return knownFor.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var actorName: TextView = itemView.findViewById<View>(R.id.actorName) as TextView
-        var actorPic: ImageView = itemView.findViewById<View>(R.id.actorPic) as ImageView
+        var actorName: TextView = itemView.findViewById<View>(R.id.movieName) as TextView
+        var moviePic: ImageView = itemView.findViewById<View>(R.id.moviePic) as ImageView
 
 //        init {
 //            itemView.setOnClickListener { view ->

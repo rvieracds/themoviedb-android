@@ -35,9 +35,6 @@ class PopularMoviesFragment : Fragment() {
     private var movieList: List<Movie> = ArrayList()
     private lateinit var llProgressBar: LinearLayout
 
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,28 +44,6 @@ class PopularMoviesFragment : Fragment() {
         recyclerView = rootView.findViewById(R.id.recycler_view)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
         swipeContainer = rootView.findViewById(R.id.main_content)
-
-//        // Set up tabs
-//        tabLayout = rootView.findViewById(R.id.tabLayout)
-//        viewPager = rootView.findViewById(R.id.viewPager)
-//
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Popular"))
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Top Rated"))
-//        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-//
-//
-//        val adapter = activity?.supportFragmentManager?.let { TabsPagerAdapter(it, tabLayout!!.tabCount) }
-////        val adapter = TabsPagerAdapter(childFragmentManager, tabLayout!!.tabCount)
-//        viewPager!!.adapter = adapter
-//        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-//
-//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab) {
-//                viewPager!!.currentItem = tab.position
-//            }
-//            override fun onTabUnselected(tab: TabLayout.Tab) {}
-//            override fun onTabReselected(tab: TabLayout.Tab) {}
-//        })
 
         initViews()
 

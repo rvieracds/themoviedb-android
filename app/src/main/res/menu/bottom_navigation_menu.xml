@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="@string/movies_title"
         android:state_checked="true"
-        android:id="@+id/bottomNavigationMovies"
+        android:id="@+id/MoviesFragment"
         android:icon="@mipmap/movies"/>
 
     <item android:title="@string/people_title"
         android:state_checked="false"
-        android:id="@+id/bottomNavigationPeople"
+        android:id="@+id/PeopleFragment"
         android:icon="@mipmap/people"/>
 
     <item android:title="@string/settings_title"
         android:state_checked="false"
-        android:id="@+id/bottomNavigationSettings"
+        android:id="@+id/SettingsFragment"
         android:icon="@mipmap/settings"/>
 </menu>

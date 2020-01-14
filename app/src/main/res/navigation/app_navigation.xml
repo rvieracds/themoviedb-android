@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_navigation">
+    android:id="@+id/app_navigation"
+    app:startDestination="@+id/MoviesFragment">
 
     <!--    MOVIES    -->
 
@@ -14,11 +15,13 @@
 
         <action
             android:id="@+id/action_tab_1_to_content"
-            app:destination="@id/PopularMoviesFragment" />
+            app:destination="@id/PopularMoviesFragment"
+            app:popUpTo="@id/MoviesFragment" />
 
         <action
             android:id="@+id/action_tab_2_to_content"
-            app:destination="@id/TopRatedMoviesFragment" />
+            app:destination="@id/TopRatedMoviesFragment"
+            app:popUpTo="@id/MoviesFragment"/>
 
     </fragment>
 
@@ -30,7 +33,8 @@
 
         <action
             android:id="@+id/action_view_popular_movie_detail"
-            app:destination="@id/MovieDetailFragment" />
+            app:destination="@id/MovieDetailFragment"
+            app:popUpTo="@id/PopularMoviesFragment" />
 
     </fragment>
 
@@ -42,7 +46,8 @@
 
         <action
             android:id="@+id/action_view_top_rated_movie_detail"
-            app:destination="@id/MovieDetailFragment" />
+            app:destination="@id/MovieDetailFragment"
+            app:popUpTo="@id/TopRatedMoviesFragment" />
 
     </fragment>
 
@@ -54,11 +59,13 @@
 
         <action
             android:id="@+id/action_view_movie_info"
-            app:destination="@id/MovieInfoFragment" />
+            app:destination="@id/MovieInfoFragment"
+            app:popUpTo="@id/MovieDetailFragment" />
 
         <action
             android:id="@+id/action_view_rate_movie"
-            app:destination="@id/RateMovieFragment" />
+            app:destination="@id/RateMovieFragment"
+            app:popUpTo="@id/MovieDetailFragment" />
 
     </fragment>
 
@@ -67,6 +74,11 @@
         android:name="com.example.themoviedb.fragments.MovieInfoFragment"
         android:label="fragment_movie_info"
         tools:layout="@layout/fragment_movie_info">
+
+        <action
+            android:id="@+id/action_movie_info_to_movie_detail"
+            app:popUpTo="@id/MovieDetailFragment" />
+
     </fragment>
 
     <fragment
@@ -87,7 +99,8 @@
 
         <action
             android:id="@+id/action_view_people_detail"
-            app:destination="@id/PeopleDetailFragment" />
+            app:destination="@id/PeopleDetailFragment"
+            app:popUpTo="@id/PeopleFragment" />
 
     </fragment>
 
@@ -99,7 +112,8 @@
 
         <action
             android:id="@+id/action_view_people_info"
-            app:destination="@id/PeopleInfoFragment" />
+            app:destination="@id/PeopleInfoFragment"
+            app:popUpTo="@id/PeopleDetailFragment" />
 
     </fragment>
 

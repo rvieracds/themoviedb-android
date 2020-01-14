@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.themoviedb.R
@@ -15,6 +17,8 @@ class MoviesFragment : Fragment() {
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private var searchView: SearchView? = null
+    private var title: TextView? = null
     private lateinit var llProgressBar: LinearLayout
 
     override fun onCreateView(
@@ -31,6 +35,20 @@ class MoviesFragment : Fragment() {
         val adapter = TabsPagerAdapter(activity!!.supportFragmentManager)
         viewPager!!.adapter = adapter
         tabLayout!!.setupWithViewPager(viewPager)
+
+        // Set up search view
+        searchView = rootView.findViewById(R.id.searchView)
+        title = rootView.findViewById(R.id.fragmentTitle)
+
+        searchView!!.setOnSearchClickListener {
+            val query = searchView!!.query.toString()
+            title!!.visibility = View.GONE
+        }
+
+        searchView!!.setOnCloseListener {
+            title!!.visibility = View.VISIBLE
+            false
+        }
 
         return rootView
     }

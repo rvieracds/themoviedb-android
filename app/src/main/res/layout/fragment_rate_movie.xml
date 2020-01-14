@@ -1,42 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp"
-    android:paddingTop="120dp"
-    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/viewBg"
-    tools:context=".fragments.RateMovieFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="#0a1c24"
-        android:layout_marginBottom="32dp"
-        android:gravity="center_horizontal"
-        android:text="Rate Spider-Man: Far from Home" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:layoutDirection="rtl"
+                app:theme="@style/ToolbarTheme">
+
+                <TextView
+                    android:id="@+id/fragmentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="left"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textColor="#2cd77d"
+                    android:lineSpacingExtra="8sp"
+                    android:text="Movie Facts" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="120dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@color/viewBg"
+            tools:context=".fragments.RateMovieFragment">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="#0a1c24"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center_horizontal"
+                    android:text="Rate Spider-Man: Far from Home" />
 
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:numStars="5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progressDrawable="@drawable/custom_ratingbar" />
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:numStars="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/custom_ratingbar" />
 
-    <ImageView
-        android:id="@+id/infoButton"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_weight="0"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        android:src="@mipmap/outline_remove_circle_24_px"
-        android:focusable="true" />
+                <ImageView
+                    android:id="@+id/infoButton"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="0"
+                    android:layout_marginTop="24dp"
+                    android:clickable="true"
+                    android:src="@mipmap/outline_remove_circle_24_px"
+                    android:focusable="true" />
 
+        </LinearLayout>
 </LinearLayout>

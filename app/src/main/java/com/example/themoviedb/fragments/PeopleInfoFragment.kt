@@ -1,16 +1,15 @@
 package com.example.themoviedb.fragments
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import com.example.themoviedb.R
 
-/**
- * A simple [Fragment] subclass.
- */
 class PeopleInfoFragment : Fragment() {
 
     override fun onCreateView(
@@ -18,7 +17,21 @@ class PeopleInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_people_info, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_people_info, container, false)
+
+
+        val toolbar = rootView!!.findViewById(R.id.toolbar) as Toolbar
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setHomeAsUpIndicator(R.drawable.close)
+
+//        toolbar.setNavigationOnClickListener { view: View? -> onBackPressed() }
+        toolbar.setNavigationOnClickListener { view: View? ->
+            findNavController().popBackStack(R.id.movie_content_detail, false)
+        }
+
+        return rootView
     }
 
 

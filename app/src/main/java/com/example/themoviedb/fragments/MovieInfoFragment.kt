@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.themoviedb.R
+
 
 class MovieInfoFragment : Fragment() {
 
@@ -19,6 +23,21 @@ class MovieInfoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_movie_info, container, false)
+
+        val toolbar = rootView!!.findViewById(R.id.toolbar) as Toolbar
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setHomeAsUpIndicator(R.drawable.close)
+
+//        toolbar.setNavigationOnClickListener { view: View? -> onBackPressed() }
+        toolbar.setNavigationOnClickListener { view: View? ->
+//            findNavController().popBackStack(R.id.movie_content_detail, false)
+
+            findNavController().navigate(R.id.action_movie_info_to_movie_detail)
+
+//            Toast.makeText(activity?.applicationContext, "CLOSE", Toast.LENGTH_SHORT).show()
+        }
 
         return rootView
     }
