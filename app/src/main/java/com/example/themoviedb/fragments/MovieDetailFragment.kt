@@ -19,9 +19,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.themoviedb.BuildConfig
 import com.example.themoviedb.R
 import com.example.themoviedb.adapter.CastAdapter
+import com.example.themoviedb.adapter.CastListAdapter
+import com.example.themoviedb.adapter.CrewListAdapter
 import com.example.themoviedb.api.Client
 import com.example.themoviedb.api.Service
 import com.example.themoviedb.model.Cast
+import com.example.themoviedb.model.Crew
 import com.example.themoviedb.model.MovieCreditResponse
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -43,6 +46,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var infoButton: ImageView
     private lateinit var rateButton: TextView
     private lateinit var movieContentDetail: LinearLayout
+    private lateinit var viewAll: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +68,7 @@ class MovieDetailFragment : Fragment() {
 
         infoButton = movieContentDetail.findViewById(R.id.infoButton)
         rateButton = movieContentDetail.findViewById(R.id.rateButton)
+        viewAll = movieContentDetail.findViewById(R.id.viewAll)
 
         if (data != null) {
             val movieId = data.getInt("id")
@@ -106,6 +111,11 @@ class MovieDetailFragment : Fragment() {
         rateButton.setOnClickListener {
             val activity = view?.context as AppCompatActivity1
             Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.RateMovieFragment, data)
+        }
+
+        viewAll.setOnClickListener {
+            val activity = view?.context as AppCompatActivity1
+            Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.MovieCastCrewFragment, data)
         }
 
         return rootView
@@ -157,11 +167,24 @@ class MovieDetailFragment : Fragment() {
             call.enqueue(object : Callback<MovieCreditResponse> {
                 override fun onResponse(call: Call<MovieCreditResponse>, response: Response<MovieCreditResponse>) =
                     if(response.isSuccessful) {
-                        val cast: List<Cast> = response.body()!!.getCast()
+                        val cast: ArrayList<Cast> = response.body()!!.cast
+                        val crew: ArrayList<Crew> = response.body()!!.crew
+
                         adapter = context?.let { CastAdapter(it, cast) }!!
                         recyclerViewCast.adapter = adapter
                         recyclerViewCast.smoothScrollToPosition(0)
                         adapter.notifyDataSetChanged()
+
+//                        val castAdapter = context?.let { CastListAdapter(it, cast) }!!
+//                        recyclerViewCast.adapter = castAdapter
+//                        recyclerViewCast.smoothScrollToPosition(0)
+//                        adapter.notifyDataSetChanged()
+//
+//                        val crewAdapter = context?.let { CrewListAdapter(it, crew) }!!
+//                        recyclerViewCast.adapter = crewAdapter
+//                        recyclerViewCast.smoothScrollToPosition(0)
+//                        adapter.notifyDataSetChanged()
+
                     } else {
                         Toast.makeText(context, "Error fetching data!", Toast.LENGTH_SHORT).show();
                     }

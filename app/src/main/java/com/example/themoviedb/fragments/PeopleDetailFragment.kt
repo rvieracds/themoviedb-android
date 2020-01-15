@@ -39,6 +39,7 @@ class PeopleDetailFragment : Fragment() {
     private lateinit var movieContentDetail: LinearLayout
     private lateinit var llProgressBar: LinearLayout
     private lateinit var actorBio: TextView
+    private lateinit var viewAll: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,7 @@ class PeopleDetailFragment : Fragment() {
         infoButton = rootView.findViewById(R.id.infoButton)
         actorBio = rootView.findViewById(R.id.actorBio)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
+        viewAll = rootView.findViewById(R.id.viewAll)
 
         llProgressBar!!.visibility = View.VISIBLE
 
@@ -95,6 +97,11 @@ class PeopleDetailFragment : Fragment() {
         infoButton.setOnClickListener {
             val activity = view?.context as AppCompatActivity
             Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.PeopleInfoFragment, data)
+        }
+
+        viewAll.setOnClickListener {
+            val activity = view?.context as AppCompatActivity
+            Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.PeopleKnownForFragment, data)
         }
 
         return rootView

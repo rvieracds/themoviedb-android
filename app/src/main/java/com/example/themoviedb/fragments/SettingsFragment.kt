@@ -8,9 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.themoviedb.R
 
-/**
- * A simple [Fragment] subclass.
- */
 class SettingsFragment : Fragment() {
 
     override fun onCreateView(
@@ -18,8 +15,12 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_settings, container, false)
+
+//        toolbar.setNavigationOnClickListener { view: View? ->
+//            findNavController().navigate(R.id.action_PeopleInfoFragment_to_PeopleDetailFragment)
+//        }
+
+        return rootView
     }
-
-
 }

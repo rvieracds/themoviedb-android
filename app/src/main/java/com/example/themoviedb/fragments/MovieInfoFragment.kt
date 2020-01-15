@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.themoviedb.R
 
-
 class MovieInfoFragment : Fragment() {
 
     private lateinit var toolbar: Toolbar
@@ -30,13 +29,8 @@ class MovieInfoFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity?)!!.supportActionBar?.setHomeAsUpIndicator(R.drawable.close)
 
-//        toolbar.setNavigationOnClickListener { view: View? -> onBackPressed() }
         toolbar.setNavigationOnClickListener { view: View? ->
-//            findNavController().popBackStack(R.id.movie_content_detail, false)
-
             findNavController().navigate(R.id.action_movie_info_to_movie_detail)
-
-//            Toast.makeText(activity?.applicationContext, "CLOSE", Toast.LENGTH_SHORT).show()
         }
 
         return rootView

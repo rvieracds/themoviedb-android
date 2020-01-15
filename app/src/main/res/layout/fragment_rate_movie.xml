@@ -20,7 +20,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 android:layoutDirection="rtl"
-                app:theme="@style/ToolbarTheme">
+                android:theme="@style/ToolbarTheme">
 
                 <TextView
                     android:id="@+id/fragmentTitle"
@@ -68,7 +68,7 @@
                     android:progressDrawable="@drawable/custom_ratingbar" />
 
                 <ImageView
-                    android:id="@+id/infoButton"
+                    android:id="@+id/removeRateBtn"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_weight="0"

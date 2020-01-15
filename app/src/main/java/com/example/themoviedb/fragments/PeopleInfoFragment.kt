@@ -19,16 +19,14 @@ class PeopleInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_people_info, container, false)
 
-
         val toolbar = rootView!!.findViewById(R.id.toolbar) as Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
         (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity?)!!.supportActionBar?.setHomeAsUpIndicator(R.drawable.close)
 
-//        toolbar.setNavigationOnClickListener { view: View? -> onBackPressed() }
         toolbar.setNavigationOnClickListener { view: View? ->
-            findNavController().popBackStack(R.id.movie_content_detail, false)
+            findNavController().navigate(R.id.action_PeopleInfoFragment_to_PeopleDetailFragment)
         }
 
         return rootView

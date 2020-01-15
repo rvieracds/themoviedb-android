@@ -73,12 +73,15 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
+        android:id="@+id/viewAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
         android:layout_marginTop="13dp"
         android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
         android:textColor="#01d277"
         android:text="View all" />
 

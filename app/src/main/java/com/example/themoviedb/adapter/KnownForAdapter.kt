@@ -1,11 +1,15 @@
 package com.example.themoviedb.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -53,16 +57,19 @@ class KnownForAdapter(context: Context, knownFor: ArrayList<KnownFor>) : Recycle
 //            itemView.setOnClickListener { view ->
 //                val pos = adapterPosition
 //                if (pos != RecyclerView.NO_POSITION) {
-//                    val clickedDataItem = people[pos]
-//                    val intent = Intent(context, DetailActivity::class.java)
-//                    intent.putExtra("original_title", people[pos].getOriginalTitle())
-//                    intent.putExtra("poster_path", people[pos].getPosterPath())
-//                    intent.putExtra("overview", people[pos].getOverview())
-//                    intent.putExtra("vote_average", people[pos].getVoteAverage())
-//                    intent.putExtra("release_date", people[pos].getReleaseDate())
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                    context.startActivity(intent)
-//                    Toast.makeText(view.context, "You clicked" + clickedDataItem.getOriginalTitle(), Toast.LENGTH_LONG).show()
+//                    val clickedDataItem = knownFor[pos]
+//                    val data = Bundle()
+//
+////                    data.putInt("id", cast[pos].getId())
+////                    data.putString("original_title", cast[pos].getOriginalTitle())
+////                    data.putString("poster_path", cast[pos].getPosterPath())
+////                    data.putString("overview",  cast[pos].getOverview())
+////                    data.putDouble("vote_average", cast[pos].getVoteAverage())
+////                    data.putString("release_date", cast[pos].getReleaseDate())
+//
+////                    val activity = view.context as AppCompatActivity
+////                    Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.PeopleKnownForFragment, data)
+////                    Toast.makeText(view.context, "You clicked" + clickedDataItem.getOriginalTitle(), Toast.LENGTH_LONG).show()
 //                }
 //            }
 //        }

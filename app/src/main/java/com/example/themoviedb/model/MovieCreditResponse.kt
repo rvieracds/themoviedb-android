@@ -1,23 +1,18 @@
 package com.example.themoviedb.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class MovieCreditResponse {
     @SerializedName("id")
-    private  var id: Int = 0
-    @SerializedName("cast")
-    private var cast: List<Cast> = ArrayList()
+    @Expose
+    var id: Int = 0
 
-    fun getId(): Int{
-        return id
-    }
-    fun setId(id: Int){
-        this.id = id
-    }
-    fun getCast(): List<Cast>{
-        return cast
-    }
-    fun setCast(cast: List<Cast>){
-        this.cast = cast
-    }
+    @SerializedName("cast")
+    @Expose
+    var cast: ArrayList<Cast> = ArrayList()
+
+    @SerializedName("crew")
+    @Expose
+    var crew: ArrayList<Crew> = ArrayList()
 }

@@ -15,13 +15,11 @@
 
         <action
             android:id="@+id/action_tab_1_to_content"
-            app:destination="@id/PopularMoviesFragment"
-            app:popUpTo="@id/MoviesFragment" />
+            app:destination="@id/PopularMoviesFragment" />
 
         <action
             android:id="@+id/action_tab_2_to_content"
-            app:destination="@id/TopRatedMoviesFragment"
-            app:popUpTo="@id/MoviesFragment"/>
+            app:destination="@id/TopRatedMoviesFragment" />
 
     </fragment>
 
@@ -33,8 +31,7 @@
 
         <action
             android:id="@+id/action_view_popular_movie_detail"
-            app:destination="@id/MovieDetailFragment"
-            app:popUpTo="@id/PopularMoviesFragment" />
+            app:destination="@id/MovieDetailFragment" />
 
     </fragment>
 
@@ -46,8 +43,7 @@
 
         <action
             android:id="@+id/action_view_top_rated_movie_detail"
-            app:destination="@id/MovieDetailFragment"
-            app:popUpTo="@id/TopRatedMoviesFragment" />
+            app:destination="@id/MovieDetailFragment" />
 
     </fragment>
 
@@ -59,14 +55,35 @@
 
         <action
             android:id="@+id/action_view_movie_info"
-            app:destination="@id/MovieInfoFragment"
-            app:popUpTo="@id/MovieDetailFragment" />
+            app:destination="@id/MovieInfoFragment" />
 
         <action
             android:id="@+id/action_view_rate_movie"
-            app:destination="@id/RateMovieFragment"
-            app:popUpTo="@id/MovieDetailFragment" />
+            app:destination="@id/RateMovieFragment" />
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_TopRatedMoviesFragment"
+            app:popUpTo="@+id/TopRatedMoviesFragment" />
 
+        <action android:id="@+id/action_MovieDetailFragment_to_PopularMoviesFragment" />
+
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_PopularMoviesFragment2"
+            app:popUpTo="@+id/PopularMoviesFragment" />
+
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_MovieCastCrewFragment"
+            app:destination="@+id/MovieCastCrewFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MovieCastCrewFragment"
+        android:name="com.example.themoviedb.fragments.MovieCastCrewFragment"
+        android:label="fragment_movie_cast_crew"
+        tools:layout="@layout/fragment_movie_cast_crew">
+        <action
+            android:id="@+id/action_MovieCastCrewFragment_to_MovieDetailFragment"
+            app:popUpTo="@+id/MovieDetailFragment" />
     </fragment>
 
     <fragment
@@ -74,11 +91,9 @@
         android:name="com.example.themoviedb.fragments.MovieInfoFragment"
         android:label="fragment_movie_info"
         tools:layout="@layout/fragment_movie_info">
-
         <action
             android:id="@+id/action_movie_info_to_movie_detail"
             app:popUpTo="@id/MovieDetailFragment" />
-
     </fragment>
 
     <fragment
@@ -86,6 +101,9 @@
         android:name="com.example.themoviedb.fragments.RateMovieFragment"
         android:label="fragment_rate_movie"
         tools:layout="@layout/fragment_rate_movie">
+        <action
+            android:id="@+id/action_RateMovieFragment_to_MovieDetailFragment"
+            app:popUpTo="@id/MovieDetailFragment" />
     </fragment>
 
 
@@ -99,8 +117,7 @@
 
         <action
             android:id="@+id/action_view_people_detail"
-            app:destination="@id/PeopleDetailFragment"
-            app:popUpTo="@id/PeopleFragment" />
+            app:destination="@id/PeopleDetailFragment" />
 
     </fragment>
 
@@ -112,9 +129,25 @@
 
         <action
             android:id="@+id/action_view_people_info"
-            app:destination="@id/PeopleInfoFragment"
-            app:popUpTo="@id/PeopleDetailFragment" />
+            app:destination="@id/PeopleInfoFragment" />
+        <action
+            android:id="@+id/action_PeopleDetailFragment_to_PeopleFragment"
+            app:popUpTo="@+id/PeopleFragment" />
 
+        <action
+            android:id="@+id/action_PeopleDetailFragment_to_PeopleKnownForFragment"
+            app:destination="@+id/PeopleKnownForFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PeopleKnownForFragment"
+        android:name="com.example.themoviedb.fragments.PeopleKnownForFragment"
+        android:label="fragment_people_info"
+        tools:layout="@layout/fragment_people_known_for">
+        <action
+            android:id="@+id/action_PeopleKnownForFragment_to_PeopleDetailFragment"
+            app:popUpTo="@+id/PeopleDetailFragment" />
     </fragment>
 
     <fragment
@@ -122,6 +155,9 @@
         android:name="com.example.themoviedb.fragments.PeopleInfoFragment"
         android:label="fragment_people_info"
         tools:layout="@layout/fragment_people_info">
+        <action
+            android:id="@+id/action_PeopleInfoFragment_to_PeopleDetailFragment"
+            app:popUpTo="@+id/PeopleDetailFragment" />
     </fragment>
 
 
