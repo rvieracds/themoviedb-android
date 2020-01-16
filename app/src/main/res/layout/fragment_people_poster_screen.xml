@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+tools:context=".fragments.PeoplePosterScreenFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        android:layoutDirection="rtl"
+        app:theme="@style/ToolbarTheme"/>
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fitsSystemWindows="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingHorizontal="16dp"
+        android:layout_marginVertical="15dp" >
+
+        <ImageView
+            android:id="@+id/downVoteOn"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:src="@drawable/on_outline_thumb_down_24_px"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/downVoteOff"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:src="@drawable/off_outline_thumb_down_24_px"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/upVoteOn"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/on_outline_thumb_up_24_px"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/upVoteOff"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/off_outline_thumb_up_24_px"
+            android:focusable="true" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -12,7 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -36,6 +38,7 @@ class PeopleDetailFragment : Fragment() {
     private lateinit var recyclerViewKnownFor: RecyclerView
     private lateinit var adapter: KnownForAdapter
     private lateinit var infoButton: ImageView
+    private lateinit var imageHeader: ImageView
     private lateinit var movieContentDetail: LinearLayout
     private lateinit var llProgressBar: LinearLayout
     private lateinit var actorBio: TextView
@@ -58,6 +61,7 @@ class PeopleDetailFragment : Fragment() {
         actorBio = rootView.findViewById(R.id.actorBio)
         llProgressBar = rootView.findViewById(R.id.llProgressBar)
         viewAll = rootView.findViewById(R.id.viewAll)
+        imageHeader = rootView.findViewById(R.id.thumbnail_image_header)
 
         llProgressBar!!.visibility = View.VISIBLE
 
@@ -94,6 +98,11 @@ class PeopleDetailFragment : Fragment() {
             Toast.makeText(context, "No API Data", Toast.LENGTH_LONG).show()
         }
 
+        imageHeader.setOnClickListener {
+            val activity = view?.context as AppCompatActivity
+            Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.PeoplePosterScreenFragment, data)
+        }
+
         infoButton.setOnClickListener {
             val activity = view?.context as AppCompatActivity
             Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.PeopleInfoFragment, data)
@@ -109,8 +118,18 @@ class PeopleDetailFragment : Fragment() {
 
     private fun initCollapsingToolbar(rootView: View) {
         val collapsingToolbarLayout = rootView.findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-        collapsingToolbarLayout.isTitleEnabled = true
+        collapsingToolbarLayout.isTitleEnabled = false
         collapsingToolbarLayout.title = ""
+
+        val toolbar = rootView!!.findViewById(R.id.toolbar) as Toolbar
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        toolbar.setNavigationOnClickListener { view: View? ->
+            findNavController().navigate(R.id.action_PeopleDetailFragment_to_PeopleFragment)
+        }
 
         val appBarLayout = rootView.findViewById<AppBarLayout>(R.id.appbar)
         appBarLayout.setExpanded(true)
@@ -124,6 +143,7 @@ class PeopleDetailFragment : Fragment() {
                     scrollRange = appBarLayout.totalScrollRange
                 }
                 if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.isTitleEnabled = true
                     collapsingToolbarLayout.title = "Person Details"
                     collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(
                         R.color.colorAccent

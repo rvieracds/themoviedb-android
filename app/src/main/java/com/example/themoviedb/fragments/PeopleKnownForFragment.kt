@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,8 +35,17 @@ class PeopleKnownForFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_people_known_for, container, false)
-
+        val toolbar = rootView!!.findViewById(R.id.toolbar) as Toolbar
         recyclerView = rootView.findViewById(R.id.recycler_view)
+
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = ""
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        toolbar.setNavigationOnClickListener { view: View? ->
+            findNavController().navigate(R.id.action_PeopleKnownForFragment_to_PeopleDetailFragment)
+        }
 
         initViews()
 

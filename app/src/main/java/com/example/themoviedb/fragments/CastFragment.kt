@@ -39,67 +39,67 @@ class CastFragment(private val movieId: Int) : Fragment() {
         // Inflate the layout for this fragment
         val rootView= inflater.inflate(R.layout.fragment_cast, container, false)
 
-        recyclerView = rootView.findViewById(R.id.recycler_view_cast)
-        initViews()
+//        recyclerView = rootView.findViewById(R.id.recycler_view_cast)
+//        initViews()
 
         return rootView
     }
 
-    private fun initViews() {
-//        val data = arguments
-//        if (data != null) {
-//            val castList = data.getSerializable("cast") as ArrayList<Cast>
-//            val movieId = data.getSerializable("id") as Int
-
-            loadJSON(movieId)
-
-//            adapter = activity?.applicationContext?.let { CastListAdapter(it, castList) }!!
+//    private fun initViews() {
+////        val data = arguments
+////        if (data != null) {
+////            val castList = data.getSerializable("cast") as ArrayList<Cast>
+////            val movieId = data.getSerializable("id") as Int
 //
-//            if(activity?.applicationContext!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-//                recyclerView?.layoutManager = GridLayoutManager(activity?.applicationContext, 1)
+////            loadJSON(movieId)
+//
+////            adapter = activity?.applicationContext?.let { CastListAdapter(it, castList) }!!
+////
+////            if(activity?.applicationContext!!.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+////                recyclerView?.layoutManager = GridLayoutManager(activity?.applicationContext, 1)
+////            }
+////
+////            recyclerView.itemAnimator = DefaultItemAnimator()
+////            recyclerView.adapter = adapter
+////            adapter.notifyDataSetChanged()
+////        }
+//    }
+//
+//    private fun loadJSON(movieId: Int) {
+//        try {
+//            if(BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
+//                Toast.makeText(context, "Obtain the API KEY first", Toast.LENGTH_SHORT).show();
+//                return
 //            }
 //
-//            recyclerView.itemAnimator = DefaultItemAnimator()
-//            recyclerView.adapter = adapter
-//            adapter.notifyDataSetChanged()
+//            val client = Client()
+//            val apiService = client.getClient()!!.create(Service::class.java)
+//            val call = apiService.getMovieCredits(movieId,
+//                BuildConfig.THE_MOVIE_DB_API_TOKEN
+//            )
+//
+//            call.enqueue(object : Callback<MovieCreditResponse> {
+//                override fun onResponse(call: Call<MovieCreditResponse>, response: Response<MovieCreditResponse>) =
+//                    if(response.isSuccessful) {
+//                        val cast: ArrayList<Cast> = response.body()!!.cast
+//
+//                        val adapter = context?.let { CastListAdapter(it, cast) }!!
+//                        recyclerView.adapter = adapter
+//                        recyclerView.smoothScrollToPosition(0)
+//                        adapter.notifyDataSetChanged()
+//                    } else {
+//                        Toast.makeText(context, "Error fetching data!", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                override fun onFailure(call: Call<MovieCreditResponse>, t: Throwable) {
+//                    Log.d("Error PEPE 0", t.message)
+//                    Toast.makeText(context, "Error fetching data!", Toast.LENGTH_SHORT).show();
+//                }
+//            })
+//        } catch(e: Exception) {
+//            Log.d("Error z", e.message)
+//            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
 //        }
-    }
-
-    private fun loadJSON(movieId: Int) {
-        try {
-            if(BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
-                Toast.makeText(context, "Obtain the API KEY first", Toast.LENGTH_SHORT).show();
-                return
-            }
-
-            val client = Client()
-            val apiService = client.getClient()!!.create(Service::class.java)
-            val call = apiService.getMovieCredits(movieId,
-                BuildConfig.THE_MOVIE_DB_API_TOKEN
-            )
-
-            call.enqueue(object : Callback<MovieCreditResponse> {
-                override fun onResponse(call: Call<MovieCreditResponse>, response: Response<MovieCreditResponse>) =
-                    if(response.isSuccessful) {
-                        val cast: ArrayList<Cast> = response.body()!!.cast
-
-                        val adapter = context?.let { CastListAdapter(it, cast) }!!
-                        recyclerView.adapter = adapter
-                        recyclerView.smoothScrollToPosition(0)
-                        adapter.notifyDataSetChanged()
-                    } else {
-                        Toast.makeText(context, "Error fetching data!", Toast.LENGTH_SHORT).show();
-                    }
-
-                override fun onFailure(call: Call<MovieCreditResponse>, t: Throwable) {
-                    Log.d("Error PEPE 0", t.message)
-                    Toast.makeText(context, "Error fetching data!", Toast.LENGTH_SHORT).show();
-                }
-            })
-        } catch(e: Exception) {
-            Log.d("Error z", e.message)
-            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
-        }
-    }
+//    }
 
 }

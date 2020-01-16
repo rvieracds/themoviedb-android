@@ -64,16 +64,32 @@
             android:id="@+id/action_MovieDetailFragment_to_TopRatedMoviesFragment"
             app:popUpTo="@+id/TopRatedMoviesFragment" />
 
-        <action android:id="@+id/action_MovieDetailFragment_to_PopularMoviesFragment" />
-
         <action
-            android:id="@+id/action_MovieDetailFragment_to_PopularMoviesFragment2"
+            android:id="@+id/action_MovieDetailFragment_to_PopularMoviesFragment"
             app:popUpTo="@+id/PopularMoviesFragment" />
 
         <action
             android:id="@+id/action_MovieDetailFragment_to_MovieCastCrewFragment"
             app:destination="@+id/MovieCastCrewFragment" />
 
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_MoviePosterScreenFragment"
+            app:destination="@+id/MoviePosterScreenFragment" />
+
+        <action
+            android:id="@+id/action_MovieDetailFragment_to_MoviesFragment"
+            app:popUpTo="@+id/MoviesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MoviePosterScreenFragment"
+        android:name="com.example.themoviedb.fragments.MoviePosterScreenFragment"
+        android:label="fragment_movie_poster_screen"
+        tools:layout="@layout/fragment_movie_poster_screen">
+        <action
+            android:id="@+id/action_MoviePosterScreenFragment_to_MovieDetailFragment"
+            app:popUpTo="@+id/MovieDetailFragment" />
     </fragment>
 
     <fragment
@@ -138,6 +154,20 @@
             android:id="@+id/action_PeopleDetailFragment_to_PeopleKnownForFragment"
             app:destination="@+id/PeopleKnownForFragment" />
 
+        <action
+            android:id="@+id/action_PeopleDetailFragment_to_PeoplePosterScreenFragment"
+            app:destination="@+id/PeoplePosterScreenFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/PeoplePosterScreenFragment"
+        android:name="com.example.themoviedb.fragments.PeoplePosterScreenFragment"
+        android:label="fragment_people_poster_screen"
+        tools:layout="@layout/fragment_people_poster_screen">
+        <action
+            android:id="@+id/action_PeoplePosterScreenFragment_to_PeopleDetailFragment"
+            app:popUpTo="@+id/PeopleDetailFragment" />
     </fragment>
 
     <fragment
